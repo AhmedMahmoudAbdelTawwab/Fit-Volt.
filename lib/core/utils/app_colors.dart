@@ -6,4 +6,5 @@ class AppColors {
   static const Color secoundryTextColor = Color(0xffC8C6C5);
   static const Color primaryColor = Color(0xffBEF501);
   static const Color shadowColor = Color(0xffBEF500);
+  static const Color backButtonBackgroundColor = Color(0xff201F1F);
 }

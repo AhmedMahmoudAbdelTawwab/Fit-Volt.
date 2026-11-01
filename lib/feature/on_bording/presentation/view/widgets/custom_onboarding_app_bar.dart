@@ -35,6 +35,11 @@ class CustomOnboardingAppBar extends StatelessWidget
                   alignment: Alignment.centerLeft,
                   child: showBackButton
                       ? InkWell(
+                          enableFeedback: false,
+                          focusColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          splashFactory: NoSplash.splashFactory,
+                          highlightColor: Colors.transparent,
                           onTap: onBack ?? () => Navigator.pop(context),
                           customBorder: const CircleBorder(),
                           child: Container(
@@ -42,8 +47,7 @@ class CustomOnboardingAppBar extends StatelessWidget
                             width: 40,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppColors.backButtonBackgroundColor
-                                  .withValues(alpha: 0.12),
+                              color: AppColors.backButtonBackgroundColor,
                             ),
                             child: const Icon(
                               Icons.arrow_back,
@@ -52,7 +56,7 @@ class CustomOnboardingAppBar extends StatelessWidget
                             ),
                           ),
                         )
-                      : null,
+                      : SizedBox.shrink(),
                 ),
               ),
               Expanded(child: Center(child: title)),
@@ -61,6 +65,11 @@ class CustomOnboardingAppBar extends StatelessWidget
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: InkWell(
+                    enableFeedback: false,
+                    focusColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    splashFactory: NoSplash.splashFactory,
+                    highlightColor: Colors.transparent,
                     onTap: onSkip,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -69,7 +78,7 @@ class CustomOnboardingAppBar extends StatelessWidget
                       ),
                       child: CustomTextWidget(
                         data: "Skip",
-                        fontSize: 14,
+                        fontSize: 18,
                         color: AppColors.secoundryTextColor,
                         fontWeight: .w600,
                       ),
