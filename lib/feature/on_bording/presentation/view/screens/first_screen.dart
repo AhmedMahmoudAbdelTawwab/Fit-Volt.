@@ -5,7 +5,7 @@ import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_tex
 import 'package:flutter/material.dart';
 
 class FirstScreen extends StatefulWidget {
-  const new({super.key});
+  const FirstScreen({super.key});
 
   @override
   State<FirstScreen> createState() => _FirstScreenState();

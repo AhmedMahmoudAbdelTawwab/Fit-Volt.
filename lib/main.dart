@@ -1,4 +1,6 @@
+import 'package:fit_volt/core/routes/app_routes.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/screens/first_screen.dart';
+import 'package:fit_volt/feature/on_bording/presentation/view/screens/secound_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +12,6 @@ class FitVolt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: FirstScreen());
+    return MaterialApp(routes: AppRoutes.appRoutes, home: FirstScreen());
   }
 }
