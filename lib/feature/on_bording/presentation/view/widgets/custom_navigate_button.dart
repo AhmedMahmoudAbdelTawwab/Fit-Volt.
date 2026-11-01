@@ -22,7 +22,7 @@ class CustomNavigateButton extends StatelessWidget {
       highlightColor: Colors.transparent,
       child: Container(
         height: 56,
-        width: 350,
+        width: double.maxFinite,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(50),

@@ -20,39 +20,37 @@ class _ThirdScreenState extends State<ThirdScreen> {
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SafeArea(
-          child: SizedBox(
-            height: 664,
-            width: double.maxFinite,
-            child: Column(
-              mainAxisAlignment: .spaceEvenly,
-              crossAxisAlignment: .center,
-              children: [
-                Image.asset(
-                  AppAssets.reachYourGoal,
-                  height: 300,
-                  fit: BoxFit.contain,
-                ),
-                Column(
-                  spacing: 12,
-                  children: [
-                    CustomTextWidget(
-                      data: "Reach Your Goals",
-                      fontSize: 28,
-                      color: AppColors.primaryTextColor,
-                      fontWeight: .w800,
-                    ),
-                    CustomTextWidget(
-                      data: 'Stay committed with custom training regimens and milestones engineered to build lasting strength.',
-                      fontSize: 16,
-                      color: AppColors.secoundryTextColor,
-                      fontWeight: .normal,
-                    ),
-                  ],
-                ),
-                CustomNavigateButton(onPressed: () {}, data: "Get Started"),
-              ],
-            ),
+        child: SizedBox(
+          height: 664,
+          width: double.maxFinite,
+          child: Column(
+            mainAxisAlignment: .spaceEvenly,
+            crossAxisAlignment: .center,
+            children: [
+              Image.asset(
+                AppAssets.reachYourGoal,
+                height: 300,
+                fit: BoxFit.contain,
+              ),
+              Column(
+                spacing: 12,
+                children: [
+                  CustomTextWidget(
+                    data: "Reach Your Goals",
+                    fontSize: 28,
+                    color: AppColors.primaryTextColor,
+                    fontWeight: .w800,
+                  ),
+                  CustomTextWidget(
+                    data: 'Stay committed with custom training regimens and milestones engineered to build lasting strength.',
+                    fontSize: 16,
+                    color: AppColors.secoundryTextColor,
+                    fontWeight: .normal,
+                  ),
+                ],
+              ),
+              CustomNavigateButton(onPressed: () {}, data: "Get Started"),
+            ],
           ),
         ),
       ),

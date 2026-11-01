@@ -21,45 +21,43 @@ class _SecondScreenState extends State<SecondScreen> {
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SafeArea(
-          child: SizedBox(
-            height: 664,
-            width: double.maxFinite,
-            child: Column(
-              mainAxisAlignment: .spaceEvenly,
-              crossAxisAlignment: .center,
-              children: [
-                Image.asset(
-                  AppAssets.recordPanel,
-                  height: 300,
-                  fit: BoxFit.contain,
-                ),
-                Column(
-                  spacing: 12,
-                  children: [
-                    CustomTextWidget(
-                      data: "Track Your Workouts",
-                      fontSize: 28,
-                      color: AppColors.primaryTextColor,
-                      fontWeight: .w800,
-                    ),
-                    CustomTextWidget(
-                      data: 'Log every set, rep, and weight effortlessly with instant biometric analytics and real-time exercise feedback.',
-                      fontSize: 16,
-                      color: AppColors.secoundryTextColor,
-                      fontWeight: .normal,
-                    ),
-                  ],
-                ),
-                CustomNavigateButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.thirdScreen);
-                    setState(() {});
-                  },
-                  data: "Next",
-                ),
-              ],
-            ),
+        child: SizedBox(
+          height: 664,
+          width: double.maxFinite,
+          child: Column(
+            mainAxisAlignment: .spaceEvenly,
+            crossAxisAlignment: .center,
+            children: [
+              Image.asset(
+                AppAssets.recordPanel,
+                height: 300,
+                fit: BoxFit.contain,
+              ),
+              Column(
+                spacing: 12,
+                children: [
+                  CustomTextWidget(
+                    data: "Track Your Workouts",
+                    fontSize: 28,
+                    color: AppColors.primaryTextColor,
+                    fontWeight: .w800,
+                  ),
+                  CustomTextWidget(
+                    data: 'Log every set, rep, and weight effortlessly with instant biometric analytics and real-time exercise feedback.',
+                    fontSize: 16,
+                    color: AppColors.secoundryTextColor,
+                    fontWeight: .normal,
+                  ),
+                ],
+              ),
+              CustomNavigateButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.thirdScreen);
+                  setState(() {});
+                },
+                data: "Next",
+              ),
+            ],
           ),
         ),
       ),
