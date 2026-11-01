@@ -1,3 +1,4 @@
+import 'package:fit_volt/core/routes/app_routes.dart';
 import 'package:fit_volt/core/utils/app_assets.dart';
 import 'package:fit_volt/core/utils/app_colors.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_navigate_button.dart';
@@ -48,7 +49,13 @@ class _SecondScreenState extends State<SecondScreen> {
                     ),
                   ],
                 ),
-                CustomNavigateButton(onPressed: () {}, data: "Next"),
+                CustomNavigateButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.thirdScreen);
+                    setState(() {});
+                  },
+                  data: "Next",
+                ),
               ],
             ),
           ),
