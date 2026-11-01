@@ -1,5 +1,7 @@
+import 'package:fit_volt/core/routes/app_routes.dart';
 import 'package:fit_volt/core/utils/app_assets.dart';
 import 'package:fit_volt/core/utils/app_colors.dart';
+import 'package:fit_volt/feature/on_bording/presentation/view/screens/secound_screen.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_navigate_button.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,13 @@ class _FirstScreenState extends State<FirstScreen> {
                     ),
                   ],
                 ),
-                CustomNavigateButton(onPressed: () {}, data: "Next"),
+                CustomNavigateButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.secoundScreenRoute);
+                    setState(() {});
+                  },
+                  data: "Next",
+                ),
               ],
             ),
           ),
