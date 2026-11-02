@@ -1,3 +1,4 @@
+import 'package:fit_volt/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -6,13 +7,13 @@ class CustomTextWidget extends StatelessWidget {
     super.key,
     required this.data,
     required this.fontSize,
-    required this.color,
-    required this.fontWeight,
+    this.color,
+    this.fontWeight,
   });
   String data;
   double fontSize;
-  Color color;
-  FontWeight fontWeight;
+  Color? color;
+  FontWeight? fontWeight;
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -20,8 +21,8 @@ class CustomTextWidget extends StatelessWidget {
       textAlign: .center,
       style: TextStyle(
         fontSize: fontSize,
-        color: color,
-        fontWeight: fontWeight,
+        color: color ?? AppColors.primaryTextColor,
+        fontWeight: fontWeight ?? .w400,
       ),
     );
   }
