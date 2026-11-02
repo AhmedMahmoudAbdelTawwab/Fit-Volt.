@@ -1,5 +1,5 @@
 import 'package:fit_volt/core/utils/app_colors.dart';
-import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_text_widget.dart';
+import 'package:fit_volt/core/common/custom_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustomOnboardingAppBar extends StatelessWidget
