@@ -98,7 +98,7 @@ packages:
     source: hosted
     version: "4.1.7"
   build_runner:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: build_runner
       sha256: "894c243f6bc32015fec466ce30a6925bd537a77a426ee5bf481120477eb3de67"
@@ -433,7 +433,7 @@ packages:
     source: hosted
     version: "4.12.0"
   injectable:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: injectable
       sha256: "1da6399509e44ddb0d8a4a35291d7122c4efb5c625a9d733bf5e48d4a72e379e"
@@ -441,7 +441,7 @@ packages:
     source: hosted
     version: "3.0.0"
   injectable_generator:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: injectable_generator
       sha256: "24d525c60ed9abf345c8749c3291ca1b3f1d21fd53344c0c644da820a92049df"
