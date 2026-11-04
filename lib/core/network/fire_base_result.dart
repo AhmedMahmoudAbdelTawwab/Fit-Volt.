@@ -1,11 +1,11 @@
 sealed class FireBaseResult<T> {}
 
-class success<T> extends FireBaseResult<T> {
+class FireBaseSuccess<T> extends FireBaseResult<T> {
   final T data;
-  success(this.data);
+  FireBaseSuccess(this.data);
 }
 
-class failure<T> extends FireBaseResult<T> {
+class FireBaseError<T> extends FireBaseResult<T> {
   final String message;
-  failure(this.message);
+  FireBaseError(this.message);
 }
