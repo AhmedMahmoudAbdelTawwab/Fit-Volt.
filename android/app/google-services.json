@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "31002407679",
+    "project_id": "fit-volt",
+    "storage_bucket": "fit-volt.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31002407679:android:93ca568a6a97b4740212ca",
+        "android_client_info": {
+          "package_name": "com.example.fit_volt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ8reRPV4oubnGAyTGYcc9c2OjVvWlu4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
