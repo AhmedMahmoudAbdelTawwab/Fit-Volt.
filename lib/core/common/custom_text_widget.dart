@@ -9,16 +9,18 @@ class CustomTextWidget extends StatelessWidget {
     required this.fontSize,
     this.color,
     this.fontWeight,
+    this.textAlign,
   });
   String data;
   double fontSize;
   Color? color;
   FontWeight? fontWeight;
+  TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     return Text(
       data,
-      textAlign: .center,
+      textAlign: textAlign ?? .center,
       style: TextStyle(
         fontSize: fontSize,
         color: color ?? AppColors.primaryTextColor,
