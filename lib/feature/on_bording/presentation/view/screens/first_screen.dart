@@ -17,7 +17,7 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomOnboardingAppBar(onSkip: () {}, showBackButton: false),
+      appBar: CustomOnboardingAppBar(showBackButton: false),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
