@@ -18,10 +18,11 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: AppColors.backgroundColor,
         title: Text(
-          "Sign In",
+          "Log In",
           style: TextStyle(
             fontSize: 20,
             color: AppColors.primaryTextColor,
@@ -82,7 +83,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: CustomTextWidget(
-                          data: "OR CREATE EMAIL",
+                          data: "OR EMAIL",
                           fontSize: 12,
                           fontWeight: .w700,
                           color: Color(0xff474746),
@@ -112,8 +113,9 @@ class _LogInScreenState extends State<LogInScreen> {
                             ..onTap = () {
                               Navigator.pushNamed(
                                 context,
-                                AppRoutes.signInScreen,
+                                AppRoutes.signUpScreen,
                               );
+                              setState(() {});
                             },
                         ),
                       ],

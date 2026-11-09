@@ -4,7 +4,9 @@ import 'package:fit_volt/core/utils/app_colors.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_navigate_button.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/widgets/custom_onboarding_app_bar.dart';
 import 'package:fit_volt/core/common/custom_text_widget.dart';
+import 'package:fit_volt/feature/on_bording/presentation/view_model/cubit/on_bording_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThirdScreen extends StatefulWidget {
   const ThirdScreen({super.key});
@@ -14,10 +16,16 @@ class ThirdScreen extends StatefulWidget {
 }
 
 class _ThirdScreenState extends State<ThirdScreen> {
+  OnBordingCubit cubit = OnBordingCubit();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomOnboardingAppBar(onSkip: () {}),
+      appBar: CustomOnboardingAppBar(
+        onSkip: () {
+          Navigator.pushNamed(context, AppRoutes.logInScreen);
+          setState(() {});
+        },
+      ),
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -50,11 +58,15 @@ class _ThirdScreenState extends State<ThirdScreen> {
                   ),
                 ],
               ),
-              CustomNavigateButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.logInScreen);
-                },
-                data: "Get Started",
+              BlocListener<OnBordingCubit, OnBordingState>(
+                bloc: cubit,
+                listener: (context, state) {},
+                child: CustomNavigateButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.logInScreen);
+                  },
+                  data: "Get Started",
+                ),
               ),
             ],
           ),

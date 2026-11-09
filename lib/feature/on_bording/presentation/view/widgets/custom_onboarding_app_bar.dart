@@ -6,13 +6,13 @@ class CustomOnboardingAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const CustomOnboardingAppBar({
     super.key,
-    required this.onSkip,
+    this.onSkip,
     this.onBack,
     this.title,
     this.showBackButton = true,
   });
 
-  final VoidCallback onSkip;
+  final VoidCallback? onSkip;
   final VoidCallback? onBack;
   final Widget? title;
   final bool showBackButton;
@@ -64,26 +64,28 @@ class CustomOnboardingAppBar extends StatelessWidget
                 width: 80,
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: InkWell(
-                    enableFeedback: false,
-                    focusColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    splashFactory: NoSplash.splashFactory,
-                    highlightColor: Colors.transparent,
-                    onTap: onSkip,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 8,
-                      ),
-                      child: CustomTextWidget(
-                        data: "Skip",
-                        fontSize: 18,
-                        color: AppColors.secoundryTextColor,
-                        fontWeight: .w600,
-                      ),
-                    ),
-                  ),
+                  child: showBackButton
+                      ? InkWell(
+                          enableFeedback: false,
+                          focusColor: Colors.transparent,
+                          splashColor: Colors.transparent,
+                          splashFactory: NoSplash.splashFactory,
+                          highlightColor: Colors.transparent,
+                          onTap: onSkip,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 8,
+                            ),
+                            child: CustomTextWidget(
+                              data: "Skip",
+                              fontSize: 18,
+                              color: AppColors.secoundryTextColor,
+                              fontWeight: .w600,
+                            ),
+                          ),
+                        )
+                      : SizedBox.shrink(),
                 ),
               ),
             ],
