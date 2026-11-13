@@ -14,9 +14,9 @@ class AppRoutes {
   static String signUpScreen = "SignUpScreen";
   static String welcome = "Welcome";
   static Map<String, WidgetBuilder> appRoutes = {
-    "FirstScreen": (context) => FirstScreen(),
-    "SecoundScreen": (context) => SecondScreen(),
-    "ThirdScreen": (context) => ThirdScreen(),
+    // "FirstScreen": (context) => FirstScreen(),
+    // "SecoundScreen": (context) => SecoundScreen(),
+    // "ThirdScreen": (context) => ThirdScreen(),
     "LogInScreen": (context) => LogInScreen(),
     "SignUpScreen": (context) => SignUpScreen(),
     "Welcome": (context) => Welcome(),

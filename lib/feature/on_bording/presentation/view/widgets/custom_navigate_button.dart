@@ -11,6 +11,7 @@ class CustomNavigateButton extends StatelessWidget {
   });
   String data;
   void Function() onPressed;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
