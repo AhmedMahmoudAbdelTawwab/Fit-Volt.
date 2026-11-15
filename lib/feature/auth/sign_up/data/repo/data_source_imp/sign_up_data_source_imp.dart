@@ -1,20 +1,20 @@
 import 'package:fit_volt/core/network/fire_base_result.dart';
-import 'package:fit_volt/feature/auth/sign_up/data/firebase/fire_base_sign_in.dart';
+import 'package:fit_volt/feature/auth/sign_up/data/firebase/fire_base_sign_up.dart';
 import 'package:fit_volt/feature/auth/sign_up/data/model/user_dto.dart';
 import 'package:fit_volt/feature/auth/sign_up/domain/entitty/user_entitty.dart';
-import 'package:fit_volt/feature/auth/sign_up/domain/repo/data_sourec/sign_in_data_source.dart';
+import 'package:fit_volt/feature/auth/sign_up/domain/repo/data_sourec/sign_up_data_source.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: SignInDataSource)
-class SignInDataSourceImp implements SignInDataSource {
-  SignInDataSourceImp(this._fireBaseSignIn);
-  FireBaseSignIn _fireBaseSignIn;
+@Injectable(as: SignUpDataSource)
+class SignUpDataSourceImp implements SignUpDataSource {
+  SignUpDataSourceImp(this._fireBaseSignUp);
+  FireBaseSignUp _fireBaseSignUp;
   @override
   Future<FireBaseResult<UserEntitty>> signIn({
     required String email,
     required String password,
   }) async {
-    final result = await _fireBaseSignIn.signIn(
+    final result = await _fireBaseSignUp.signIn(
       email: email,
       password: password,
     );

@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 
 //!this to create a user account with email and password
 @lazySingleton
-class FireBaseSignIn {
+class FireBaseSignUp {
   Future<FireBaseResult<UserDto>> signIn({
     required String email,
     required String password,
