@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:fit_volt/core/network/fire_base_result.dart';
 import 'package:fit_volt/feature/auth/sign_up/domain/entitty/user_entitty.dart';
 import 'package:fit_volt/feature/auth/sign_up/domain/use_case/sign_up_use_case.dart';
-import 'package:meta/meta.dart';
+import 'package:injectable/injectable.dart';
 
 part 'sign_up_cubit_state.dart';
 
+@injectable
 class SignUpCubit extends Cubit<SignUpCubitState> {
   SignUpUseCase _case;
   SignUpCubit(this._case) : super(SignUpCubitInitial());

@@ -8,13 +8,14 @@ import 'package:fit_volt/core/utils/app_validator.dart';
 import 'package:fit_volt/feature/auth/sign_up/presentation/view/widget/custom_create_emaill_button_widget.dart';
 import 'package:fit_volt/feature/auth/sign_up/presentation/view/widget/custom_sign_up_button_widget.dart';
 import 'package:fit_volt/feature/auth/sign_up/presentation/view/widget/custom_text_form_filed_widget.dart';
-import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart';
+import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit/hiding_password_cubit.dart';
+import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit_create_account/sign_up_cubit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const new({super.key});
+  SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -25,42 +26,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController userEmailController = TextEditingController();
   TextEditingController userPasswordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  HidingPasswordCubit _hidingPasswordCubit = HidingPasswordCubit();
+  @override
   void dispose() {
-    super.dispose();
     userNameController.dispose();
     userEmailController.dispose();
     userPasswordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => serviceLocator<SignUpCubit>()
-        ..createAccount(
-          email: userEmailController.text,
-          password: userPasswordController.text,
-        ),
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: AppColors.backgroundColor,
-          title: Text(
-            "Sign Up",
-            style: TextStyle(
-              fontSize: 20,
-              color: AppColors.primaryTextColor,
-              fontWeight: .w600,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        backgroundColor: AppColors.backgroundColor,
+        title: Text(
+          "Sign Up",
+          style: TextStyle(
+            fontSize: 20,
+            color: AppColors.primaryTextColor,
+            fontWeight: .w600,
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                Column(
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              BlocProvider<SignUpCubit>(
+                create: (context) => serviceLocator<SignUpCubit>(),
+                child: Column(
                   spacing: 15,
                   children: [
                     Image.asset(AppAssets.fitVoltLogo, height: 170, width: 170),
@@ -114,53 +113,75 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontWeight: .w700,
                             color: AppColors.textFiledPrmaryColor,
                           ),
-                          CustomTextFormFiledWidget(
-                            hintText: "***********",
-                            controller: userPasswordController,
-                            iconAssetPath: AppIcons.passwordIcon,
-                            textInputAction: .next,
-                            validator: AppValidator.validatePassword,
+                          BlocBuilder<HidingPasswordCubit, bool>(
+                            bloc: _hidingPasswordCubit,
+                            builder: (context, state) {
+                              return CustomTextFormFiledWidget(
+                                hintText: "***********",
+                                controller: userPasswordController,
+                                iconAssetPath: AppIcons.passwordIcon,
+                                textInputAction: .done,
+                                validator: AppValidator.validatePassword,
+                                obscureText: state,
+                                onPressedSuffixIcon: () {
+                                  if (state == true) {
+                                    _hidingPasswordCubit.changePassword();
+                                  } else {
+                                    _hidingPasswordCubit.changePassword();
+                                  }
+                                },
+                                suffixIcon: SizedBox(
+                                  child: state
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),
                     ),
 
-                    BlocListener<SignUpCubit, SignUpCubitState>(
+                    BlocConsumer<SignUpCubit, SignUpCubitState>(
                       listener: (context, state) {
-                        if (state is SignUpCubitError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(state.messageError)),
-                          );
-                        }
                         if (state is SignUpCubitSuccess) {
-                          Navigator.pushNamedAndRemoveUntil(
+                          Navigator.pushReplacementNamed(
                             context,
                             AppRoutes.welcome,
-                            (route) => false,
                           );
                         }
-                        if (state is SignUpCubitLodaing) {
+                        if (state is SignUpCubitError) {
                           showDialog(
                             context: context,
-                            barrierDismissible: false,
-                            builder: (context) =>
-                                Center(child: CircularProgressIndicator()),
+                            builder: (_) => AlertDialog(
+                              title: const Text('Error'),
+                              content: Text(state.messageError),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
                           );
                         }
                       },
-                      child: CustomCreateEmaillButtonWidget(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) ;
-                          {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              AppRoutes.welcome,
-                              (route) => false,
-                            );
-                          }
-                        },
-                        data: "Create Account",
-                      ),
+                      builder: (context, state) {
+                        if (state is SignUpCubitLodaing) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        return CustomCreateEmaillButtonWidget(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<SignUpCubit>().createAccount(
+                                email: userEmailController.text,
+                                password: userPasswordController.text,
+                              );
+                            }
+                          },
+                          data: "Create Account",
+                        );
+                      },
                     ),
 
                     Row(
@@ -219,8 +240,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(height: 15),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

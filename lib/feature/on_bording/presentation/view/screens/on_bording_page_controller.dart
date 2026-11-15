@@ -1,3 +1,4 @@
+import 'package:fit_volt/core/routes/app_routes.dart';
 import 'package:fit_volt/core/utils/app_colors.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/screens/first_screen.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/screens/secound_screen.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBordingPageController extends StatefulWidget {
-  const new({super.key});
+  OnBordingPageController({super.key});
 
   @override
   State<OnBordingPageController> createState() =>
@@ -18,6 +19,10 @@ class _OnBordingPageControllerState extends State<OnBordingPageController> {
   PageController _controller = PageController();
   List<Widget> pages = [FirstScreen(), SecoundScreen(), ThirdScreen()];
   int index = 0;
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +61,14 @@ class _OnBordingPageControllerState extends State<OnBordingPageController> {
                     CustomNavigateButton(
                       onPressed: () {
                         print(index);
-                        if (index < pages.length) {
+                        if (index < pages.length - 1) {
                           _controller.nextPage(
                             duration: Duration(milliseconds: 200),
                             curve: Curves.bounceIn,
                           );
-                        } else {}
+                        } else {
+                          Navigator.pushNamed(context, AppRoutes.signUpScreen);
+                        }
                       },
                       data: "Next",
                     ),

@@ -11,18 +11,25 @@ class CustomTextFormFiledWidget extends StatelessWidget {
     required this.textInputAction,
     required this.hintText,
     required this.validator,
+    this.obscureText,
+    this.onPressedSuffixIcon,
+    this.suffixIcon,
   });
   TextEditingController controller;
   TextInputAction textInputAction;
   String? Function(String?)? validator;
+  void Function()? onPressedSuffixIcon;
   String iconAssetPath;
   String hintText;
+  Widget? suffixIcon;
+  bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       style: TextStyle(color: AppColors.textFiledPrmaryColor),
       controller: controller,
+      obscureText: obscureText ?? false,
       decoration: InputDecoration(
         hint: CustomTextWidget(
           data: hintText,
@@ -31,6 +38,10 @@ class CustomTextFormFiledWidget extends StatelessWidget {
           textAlign: .start,
         ),
         prefixIcon: Image.asset(iconAssetPath),
+        suffixIcon: InkWell(
+          onTap: onPressedSuffixIcon ?? () {},
+          child: suffixIcon ?? SizedBox.shrink(),
+        ),
         filled: true,
         fillColor: AppColors.authButtonBackGround,
         enabledBorder: OutlineInputBorder(
