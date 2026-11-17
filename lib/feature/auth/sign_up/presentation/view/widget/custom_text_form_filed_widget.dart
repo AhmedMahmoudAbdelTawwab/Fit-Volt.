@@ -39,6 +39,7 @@ class CustomTextFormFiledWidget extends StatelessWidget {
         ),
         prefixIcon: Image.asset(iconAssetPath),
         suffixIcon: InkWell(
+          enableFeedback: false,
           onTap: onPressedSuffixIcon ?? () {},
           child: suffixIcon ?? SizedBox.shrink(),
         ),
