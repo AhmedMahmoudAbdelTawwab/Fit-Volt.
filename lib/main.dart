@@ -5,6 +5,8 @@ import 'package:fit_volt/core/utils/app_colors.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/screens/on_bording_page_controller.dart';
 import 'package:fit_volt/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:toastification/toastification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +20,13 @@ class FitVolt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
-
-      routes: AppRoutes.appRoutes,
-      home: OnBordingPageController(),
+    return ToastificationWrapper(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
+        routes: AppRoutes.appRoutes,
+        home: OnBordingPageController(),
+      ),
     );
   }
 }

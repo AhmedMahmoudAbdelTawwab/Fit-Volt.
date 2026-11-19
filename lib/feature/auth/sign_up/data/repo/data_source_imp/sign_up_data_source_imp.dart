@@ -13,10 +13,12 @@ class SignUpDataSourceImp implements SignUpDataSource {
   Future<FireBaseResult<UserEntitty>> signIn({
     required String email,
     required String password,
+    required String name,
   }) async {
     final result = await _fireBaseSignUp.signIn(
       email: email,
       password: password,
+      name: name,
     );
     switch (result) {
       case FireBaseSuccess<UserDto>():

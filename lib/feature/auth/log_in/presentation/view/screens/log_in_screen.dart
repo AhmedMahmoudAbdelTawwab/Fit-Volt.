@@ -111,7 +111,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.pushNamed(
+                              Navigator.pushReplacementNamed(
                                 context,
                                 AppRoutes.signUpScreen,
                               );

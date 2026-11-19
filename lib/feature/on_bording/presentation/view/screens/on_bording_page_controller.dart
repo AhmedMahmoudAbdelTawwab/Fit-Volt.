@@ -67,7 +67,10 @@ class _OnBordingPageControllerState extends State<OnBordingPageController> {
                             curve: Curves.bounceIn,
                           );
                         } else {
-                          Navigator.pushNamed(context, AppRoutes.signUpScreen);
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.signUpScreen,
+                          );
                         }
                       },
                       data: "Next",

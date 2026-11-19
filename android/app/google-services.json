@@ -12,7 +12,20 @@
           "package_name": "com.example.fit_volt"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "31002407679-0bscr1aaf6pgingv5garvsrolvkbumq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fit_volt",
+            "certificate_hash": "3ca24fe28a71c51e15bab99783d148591a9219b2"
+          }
+        },
+        {
+          "client_id": "31002407679-p5kmrn2q4miea2l8ub7jqcn32t17dm91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDZ8reRPV4oubnGAyTGYcc9c2OjVvWlu4Q"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31002407679-p5kmrn2q4miea2l8ub7jqcn32t17dm91.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "31002407679-5h70r5cdljvbjrrg5gql6ba5h0d3gr1e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fitVolt"
+              }
+            }
+          ]
         }
       }
     }

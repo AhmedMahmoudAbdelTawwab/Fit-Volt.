@@ -12,8 +12,13 @@ class SignUpRepoImp implements SignUpRepo {
   Future<FireBaseResult<UserEntitty>> signIn({
     required String email,
     required String password,
+    required String name,
   }) async {
-    final result = await _dataSource.signIn(email: email, password: password);
+    final result = await _dataSource.signIn(
+      email: email,
+      password: password,
+      name: name,
+    );
     return result;
   }
 }
