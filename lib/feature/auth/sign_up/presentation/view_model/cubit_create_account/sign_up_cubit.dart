@@ -13,9 +13,14 @@ class SignUpCubit extends Cubit<SignUpCubitState> {
   Future<void> createAccount({
     required String email,
     required String password,
+    required String name,
   }) async {
     emit(SignUpCubitLodaing());
-    final result = await _case.call(email: email, password: password);
+    final result = await _case.call(
+      email: email,
+      password: password,
+      name: name,
+    );
     switch (result) {
       case FireBaseSuccess<UserEntitty>():
         emit(SignUpCubitSuccess(userEntitty: result.data));

@@ -10,5 +10,6 @@ class SignUpUseCase {
   Future<FireBaseResult<UserEntitty>> call({
     required String email,
     required String password,
-  }) async => _signInRepo.signIn(email: email, password: password);
+    required String name,
+  }) async => _signInRepo.signIn(email: email, password: password, name: name);
 }

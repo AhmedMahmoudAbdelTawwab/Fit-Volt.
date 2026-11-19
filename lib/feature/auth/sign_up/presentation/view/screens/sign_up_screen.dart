@@ -13,6 +13,7 @@ import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit_crea
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:toastification/toastification.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -145,23 +146,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     BlocConsumer<SignUpCubit, SignUpCubitState>(
                       listener: (context, state) {
                         if (state is SignUpCubitSuccess) {
+                          toastification.show(
+                            type: .success,
+                            style: .fillColored,
+                            autoCloseDuration: Duration(seconds: 3),
+                            title: CustomTextWidget(
+                              data: "Welcome to Fit Volt",
+                              fontSize: 12,
+                            ),
+                            direction: TextDirection.ltr,
+                            animationDuration: const Duration(
+                              milliseconds: 500,
+                            ),
+                          );
                           Navigator.pushReplacementNamed(
                             context,
-                            AppRoutes.welcome,
+                            AppRoutes.profileSetup,
                           );
                         }
                         if (state is SignUpCubitError) {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: const Text('Error'),
-                              content: Text(state.messageError),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text('OK'),
-                                ),
-                              ],
+                          toastification.show(
+                            type: .error,
+                            style: .fillColored,
+                            autoCloseDuration: Duration(seconds: 3),
+                            title: CustomTextWidget(
+                              data: state.messageError,
+                              fontSize: 12,
+                            ),
+                            direction: TextDirection.ltr,
+                            animationDuration: const Duration(
+                              milliseconds: 500,
                             ),
                           );
                         }
@@ -176,6 +190,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               context.read<SignUpCubit>().createAccount(
                                 email: userEmailController.text,
                                 password: userPasswordController.text,
+                                name: userNameController.text,
                               );
                             }
                           },
@@ -227,7 +242,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushNamed(
+                                Navigator.pushReplacementNamed(
                                   context,
                                   AppRoutes.logInScreen,
                                 );

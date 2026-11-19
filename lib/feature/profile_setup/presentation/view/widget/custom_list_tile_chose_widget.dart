@@ -13,7 +13,7 @@ class CustomListTileChoseWidget extends StatelessWidget {
   final String title;
   final String imageIcon;
   final bool value;
-  final void Function(bool) onChanged;
+  final ValueChanged<bool> onChanged;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

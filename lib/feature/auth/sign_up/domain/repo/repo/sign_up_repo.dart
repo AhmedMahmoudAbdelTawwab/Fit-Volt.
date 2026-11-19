@@ -5,5 +5,6 @@ abstract interface class SignUpRepo {
   Future<FireBaseResult<UserEntitty>> signIn({
     required String email,
     required String password,
+    required String name,
   });
 }
