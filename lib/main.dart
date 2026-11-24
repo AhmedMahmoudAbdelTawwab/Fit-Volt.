@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fit_volt/core/routes/app_routes.dart';
 import 'package:fit_volt/core/service_locator/service_locator.dart';
 import 'package:fit_volt/core/utils/app_colors.dart';
+import 'package:fit_volt/feature/auth/log_in/presentation/view/screens/log_in_screen.dart';
 import 'package:fit_volt/feature/on_bording/presentation/view/screens/on_bording_page_controller.dart';
 import 'package:fit_volt/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class FitVolt extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
         routes: AppRoutes.appRoutes,
-        home: OnBordingPageController(),
+        home: LogInScreen(),
       ),
     );
   }

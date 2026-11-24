@@ -54,6 +54,11 @@ class FirebaseSignUpWithGoogle {
       }
     } on SocketException {
       return FireBaseError<UserDto>("No internet please try again latter");
+    } on GoogleSignInException catch (e) {
+      if (e.code == GoogleSignInExceptionCode.canceled) {
+        return FireBaseError<UserDto>("Canceled");
+      }
+      return FireBaseError<UserDto>("Google Sign-In failed");
     } catch (e) {
       return FireBaseError<UserDto>("Uknown error please try again latter");
     }
