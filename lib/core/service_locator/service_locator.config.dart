@@ -32,6 +32,8 @@ import 'package:fit_volt/feature/auth/sign_up/domain/repo/repo/sign_up_with_goog
     as _i529;
 import 'package:fit_volt/feature/auth/sign_up/domain/use_case/sign_up_use_case.dart'
     as _i824;
+import 'package:fit_volt/feature/auth/sign_up/domain/use_case/sign_up_with_google_use_case.dart'
+    as _i182;
 import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit_create_account/sign_up_cubit.dart'
     as _i222;
 import 'package:get_it/get_it.dart' as _i174;
@@ -64,11 +66,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i426.SignUpRepo>(
       () => _i913.SignUpRepoImp(gh<_i770.SignUpDataSource>()),
     );
+    gh.factory<_i182.SignUpWithGoogleUseCase>(
+      () => _i182.SignUpWithGoogleUseCase(
+        googleRepo: gh<_i529.SignUpWithGoogleRepo>(),
+      ),
+    );
     gh.factory<_i824.SignUpUseCase>(
       () => _i824.SignUpUseCase(gh<_i426.SignUpRepo>()),
     );
     gh.factory<_i222.SignUpCubit>(
-      () => _i222.SignUpCubit(gh<_i824.SignUpUseCase>()),
+      () => _i222.SignUpCubit(
+        gh<_i824.SignUpUseCase>(),
+        gh<_i182.SignUpWithGoogleUseCase>(),
+      ),
     );
     return this;
   }

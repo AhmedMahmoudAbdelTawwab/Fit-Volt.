@@ -9,18 +9,21 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class FirebaseSignUpWithGoogle {
-  final _googleSignUpInstance = GoogleSignIn.instance;
-  final _fireStore = FirebaseFirestore.instance;
   Future<FireBaseResult<UserDto>> signUpWithGoogle() async {
+    final GoogleSignIn _googleSignUpInstance = GoogleSignIn.instance;
+    final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
     try {
-      final googleUser = await _googleSignUpInstance.authenticate();
-      final idToken = googleUser.authentication.idToken;
+      await _googleSignUpInstance.initialize();
+      final GoogleSignInAccount googleUser = await _googleSignUpInstance
+          .authenticate();
+
+      final String? idToken = googleUser.authentication.idToken;
       if (idToken == null) {
         return FireBaseError<UserDto>(
           "Id token from google not found , please try again or sign up with anoter account",
         );
       } else {
-        final credintial = await GoogleAuthProvider.credential(
+        final OAuthCredential credintial = await GoogleAuthProvider.credential(
           idToken: idToken,
         );
         final firebaseCredintila = await FirebaseAuth.instance
@@ -32,7 +35,7 @@ class FirebaseSignUpWithGoogle {
                   UserDto.fromJson(snapshot.data()!),
               toFirestore: (json, _) => json.toJson(),
             );
-        final uid = firebaseCredintila.user!.uid;
+        final String uid = firebaseCredintila.user!.uid;
 
         final docRef = await addUser.doc(uid);
         final snapshot = await docRef.get();

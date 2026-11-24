@@ -12,6 +12,7 @@ import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit/hidi
 import 'package:fit_volt/feature/auth/sign_up/presentation/view_model/cubit_create_account/sign_up_cubit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toastification/toastification.dart';
 
@@ -27,9 +28,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController userEmailController = TextEditingController();
   TextEditingController userPasswordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  HidingPasswordCubit _hidingPasswordCubit = HidingPasswordCubit();
+
+  final HidingPasswordCubit _hidingPasswordCubit = HidingPasswordCubit();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   void dispose() {
+    _hidingPasswordCubit.close();
     userNameController.dispose();
     userEmailController.dispose();
     userPasswordController.dispose();
@@ -146,23 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     BlocConsumer<SignUpCubit, SignUpCubitState>(
                       listener: (context, state) {
                         if (state is SignUpCubitSuccess) {
-                          toastification.show(
-                            type: .success,
-                            style: .fillColored,
-                            autoCloseDuration: Duration(seconds: 3),
-                            title: CustomTextWidget(
-                              data: "Welcome to Fit Volt",
-                              fontSize: 12,
-                            ),
-                            direction: TextDirection.ltr,
-                            animationDuration: const Duration(
-                              milliseconds: 500,
-                            ),
-                          );
-                          Navigator.pushReplacementNamed(
-                            context,
-                            AppRoutes.profileSetup,
-                          );
+                          Navigator.pushNamed(context, AppRoutes.profileSetup);
                         }
                         if (state is SignUpCubitError) {
                           toastification.show(
@@ -214,10 +206,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Expanded(child: Divider(color: AppColors.dividerColor)),
                       ],
                     ),
-                    CustomSignUpButtonWidget(
-                      onPressed: () {},
-                      data: "Sign up with Google",
-                      imageName: AppAssets.googleImage,
+                    BlocConsumer<SignUpCubit, SignUpCubitState>(
+                      builder: (context, state) {
+                        if (state is SignUpCubitLodaing) {
+                          return CircularProgressIndicator();
+                        }
+                        return CustomSignUpButtonWidget(
+                          onPressed: () {
+                            context.read<SignUpCubit>().signUpwithGoogle();
+                          },
+                          data: "Sign up with Google",
+                          imageName: AppAssets.googleImage,
+                        );
+                      },
+                      listener: (context, state) {
+                        if (state is SignUpCubitSuccess) {
+                          Navigator.pushNamed(context, AppRoutes.profileSetup);
+                        }
+                        if (state is SignUpCubitError) {
+                          toastification.show(
+                            type: .error,
+                            style: .fillColored,
+                            autoCloseDuration: Duration(seconds: 3),
+                            title: CustomTextWidget(
+                              data: state.messageError,
+                              fontSize: 12,
+                            ),
+                            direction: TextDirection.ltr,
+                            animationDuration: const Duration(
+                              milliseconds: 500,
+                            ),
+                          );
+                        }
+                      },
                     ),
                     CustomSignUpButtonWidget(
                       onPressed: () {},
@@ -242,7 +263,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushReplacementNamed(
+                                Navigator.pushNamed(
                                   context,
                                   AppRoutes.logInScreen,
                                 );
