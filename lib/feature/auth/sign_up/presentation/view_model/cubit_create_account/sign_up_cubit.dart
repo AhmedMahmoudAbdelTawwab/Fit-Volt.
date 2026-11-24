@@ -20,6 +20,10 @@ class SignUpCubit extends Cubit<SignUpCubitState> {
       case FireBaseSuccess<UserEntitty>():
         emit(SignUpCubitSuccess(userEntitty: result.data));
       case FireBaseError<UserEntitty>():
+        if (result.message == "Canceled") {
+          emit(SignUpCubitInitial());
+          return;
+        }
         emit(SignUpCubitError(messageError: result.message));
     }
   }
