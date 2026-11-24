@@ -13,18 +13,26 @@ class FireBaseSignUp {
     required String name,
   }) async {
     try {
-      final credential = await FirebaseAuth.instance
+      final UserCredential credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       final db = FirebaseFirestore.instance;
-      final addUser = db
+      final addUser = await db
           .collection("users")
           .withConverter<UserDto>(
             fromFirestore: (snapshot, _) => UserDto.fromJson(snapshot.data()!),
             toFirestore: (user, _) => user.toJson(),
           );
       final uid = credential.user!.uid;
-      final user = UserDto(id: uid, name: name, email: email);
-      await addUser.doc(uid).set(user);
+      UserDto user;
+      final docRef = await addUser.doc(uid);
+      final snapshot = await docRef.get();
+      if (snapshot.exists && snapshot.data() != null) {
+        user = await snapshot.data()!;
+      } else {
+        user = UserDto(id: uid, name: name, email: email);
+        await docRef.set(user);
+      }
+
       return FireBaseSuccess<UserDto>(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
